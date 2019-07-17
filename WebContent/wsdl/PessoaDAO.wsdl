@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://DAO.model" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://DAO.model" xmlns:intf="http://DAO.model" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://DAO.model" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="lp">
+    <complexType>
+     <sequence>
+      <element name="RG" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lpResponse">
+    <complexType>
+     <sequence>
+      <element name="lpReturn" type="impl:ArrayOf_xsd_anyType"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_anyType">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+   <element name="Busca">
+    <complexType>
+     <sequence>
+      <element name="RG" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="BuscaResponse">
+    <complexType>
+     <sequence>
+      <element name="BuscaReturn" type="impl:ArrayOf_xsd_anyType"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="lpResponse">
+
+      <wsdl:part element="impl:lpResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="lpRequest">
+
+      <wsdl:part element="impl:lp" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="BuscaRequest">
+
+      <wsdl:part element="impl:Busca" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="BuscaResponse">
+
+      <wsdl:part element="impl:BuscaResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="PessoaDAO">
+
+      <wsdl:operation name="lp">
+
+         <wsdl:input message="impl:lpRequest" name="lpRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:lpResponse" name="lpResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="Busca">
+
+         <wsdl:input message="impl:BuscaRequest" name="BuscaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:BuscaResponse" name="BuscaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="PessoaDAOSoapBinding" type="impl:PessoaDAO">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="lp">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lpRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lpResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="Busca">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="BuscaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="BuscaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="PessoaDAOService">
+
+      <wsdl:port binding="impl:PessoaDAOSoapBinding" name="PessoaDAO">
+
+         <wsdlsoap:address location="http://localhost:8080/WBuscaRG/services/PessoaDAO"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

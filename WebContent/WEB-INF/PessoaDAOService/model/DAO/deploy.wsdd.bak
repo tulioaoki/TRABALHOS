@@ -1,0 +1,71 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from PessoaDAOService WSDL service -->
+
+  <service name="PessoaDAO" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://DAO.model"/>
+      <parameter name="wsdlServiceElement" value="PessoaDAOService"/>
+      <parameter name="schemaQualified" value="http://DAO.model"/>
+      <parameter name="wsdlServicePort" value="PessoaDAO"/>
+      <parameter name="className" value="model.DAO.PessoaDAOSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="PessoaDAO"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="lp" qname="operNS:lp" xmlns:operNS="http://DAO.model" returnQName="retNS:lpReturn" xmlns:retNS="http://DAO.model" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://DAO.model" returnItemQName="tns:item" xmlns:tns="http://DAO.model" soapAction="" >
+        <parameter qname="pns:RG" xmlns:pns="http://DAO.model" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="busca" qname="operNS:Busca" xmlns:operNS="http://DAO.model" returnQName="retNS:BuscaReturn" xmlns:retNS="http://DAO.model" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://DAO.model" returnItemQName="tns:item" xmlns:tns="http://DAO.model" soapAction="" >
+        <parameter qname="pns:RG" xmlns:pns="http://DAO.model" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="lp busca"/>
+
+      <arrayMapping
+        xmlns:ns="http://DAO.model"
+        qname="ns:ArrayOf_xsd_anyType"
+        type="java:java.lang.Object[]"
+        innerType="cmp-ns:anyType" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://DAO.model"
+        qname="ns:>lp"
+        type="java:model.DAO.Lp"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://DAO.model"
+        qname="ns:>lpResponse"
+        type="java:model.DAO.LpResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://DAO.model"
+        qname="ns:>BuscaResponse"
+        type="java:model.DAO.BuscaResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://DAO.model"
+        qname="ns:>Busca"
+        type="java:model.DAO.Busca"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
